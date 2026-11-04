@@ -7,17 +7,17 @@
   --ink: #1a1f22;           /* main text */
   --ink-soft: #5b6468;      /* secondary text */
   --line: #e4e1da;          /* hairlines */
-  --accent: #1b4d5c;        /* deep teal (your original) */
-  --accent-bright: #2e8b8b;
+  --accent: #c2553a;        /* terracotta */
+  --accent-bright: #a3432c; /* darker terracotta for hover */
   --crema: #b07a4a;         /* coffee accent */
 
   /* One "transit line" color per city */
   --line-jkt: #c2553a;      /* Jakarta — terracotta */
   --line-chi: #5b3a94;      /* Evanston/Chicago — purple */
-  --line-nyc: #2e8b8b;      /* New York — teal */
+  --line-nyc: #2b2b2b;      /* New York — subway black */
 
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
+  --font-display: 'Fraunces Variable', Georgia, serif;
+  --font-body: 'Inter Variable', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   --radius: 14px;
@@ -32,12 +32,12 @@
     --ink: #ecebe7;
     --ink-soft: #9aa3a6;
     --line: #2a3033;
-    --accent: #6cc3c3;
-    --accent-bright: #8fd9d4;
+    --accent: #e07a5f;
+    --accent-bright: #ec9a83;
     --crema: #d9a473;
     --line-jkt: #e07a5f;
     --line-chi: #9b7ad6;
-    --line-nyc: #5cc2bd;
+    --line-nyc: #d8d4cc;
   }
 }
 
@@ -55,8 +55,8 @@ img { max-width: 100%; height: auto; display: block; }
 a { color: var(--accent); text-underline-offset: 3px; }
 a:hover { color: var(--accent-bright); }
 
-h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 .5em; }
-h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 600; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.12; letter-spacing: -0.015em; margin: 0 0 .5em; }
+h1 { font-size: clamp(2.3rem, 6vw, 3.8rem); font-weight: 560; }
 h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; }
 h3 { font-size: 1.15rem; font-weight: 600; }
 p { margin: 0 0 1em; }

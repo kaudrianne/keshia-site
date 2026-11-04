@@ -66,6 +66,3 @@ After that, every time you save changes to GitHub, the site rebuilds on its own 
 
 **Custom domain (optional, ~$10–15/year):** buy one (e.g. at Cloudflare or Namecheap), add it in Netlify under Domain settings, and update `site` in `astro.config.mjs`.
 
-## The loader
-
-The camera-aperture animation (`src/components/ApertureLoader.astro`) plays once per visit, not on every page, and is skipped for anyone with "reduce motion" turned on.
