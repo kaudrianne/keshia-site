@@ -1,0 +1,88 @@
+[
+  {
+    "id": "01",
+    "roastery": "Giyanti",
+    "beans": "House Blend",
+    "grinder": "Kin",
+    "clicks": 34,
+    "dose_g": 16,
+    "yield_g": 32,
+    "preinfusion_s": 5
+  },
+  {
+    "id": "02",
+    "roastery": "A Roastworks",
+    "beans": "Peanut Butter",
+    "grinder": "Kin",
+    "clicks": 33,
+    "dose_g": 18,
+    "yield_g": 36,
+    "preinfusion_s": 5
+  },
+  {
+    "id": "03",
+    "roastery": "Porto Rico",
+    "grinder": "Kin",
+    "clicks": 33,
+    "dose_g": 16,
+    "yield_g": 32,
+    "preinfusion_s": 5
+  },
+  {
+    "id": "04",
+    "roastery": "Upstate",
+    "grinder": "Kin",
+    "clicks": 33,
+    "dose_g": 18,
+    "yield_g": 36,
+    "preinfusion_s": 5
+  },
+  {
+    "id": "05",
+    "roastery": "Maru",
+    "beans": "Kemi Blend",
+    "grinder": "Kin",
+    "clicks": 33,
+    "dose_g": 18,
+    "yield_g": 36,
+    "preinfusion_s": 5,
+    "note": "Too sour"
+  },
+  {
+    "id": "06",
+    "date": "2026-10-27",
+    "roastery": "Maru",
+    "beans": "Kemi Blend",
+    "grinder": "Kin",
+    "clicks": 32,
+    "dose_g": 18,
+    "yield_g": 40,
+    "preinfusion_s": 5,
+    "note": "Standard latte"
+  },
+  {
+    "id": "07",
+    "date": "2026-10-27",
+    "roastery": "Maru",
+    "beans": "Kemi Blend",
+    "grinder": "Kin",
+    "clicks": 31,
+    "dose_g": 18,
+    "yield_g": 18,
+    "preinfusion_s": 5,
+    "note": "Ristretto style; similar to Japanese coffee shop; creamy and thicker"
+  },
+  {
+    "id": "08",
+    "date": "2026-10-28",
+    "roastery": "Maru",
+    "beans": "Kemi Blend",
+    "grinder": "Kin",
+    "clicks": 31,
+    "dose_g": 17,
+    "yield_g": 25,
+    "preinfusion_s": 5,
+    "shot_s": 28,
+    "note": "Sweet, bold, body"
+  }
+]

@@ -1,0 +1,104 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import TransitLine from '../components/TransitLine.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { tagline, contact } from '../data/site';
+import { food } from '../data/food';
+
+const featured = (await getCollection('projects', (p) => p.data.featured))
+  .sort((a, b) => a.data.order - b.data.order);
+const photos = await getCollection('photos');
+const brews = await getCollection('brews');
+const coverPhoto = photos[0];
+---
+<Base>
+  <section class="hero wrap">
+    <p class="label">Applied Analytics · Columbia ’27</p>
+    <h1>Hi, I’m Keshia.<br /><span class="soft">I find the story the numbers forgot to tell.</span></h1>
+    <p class="lede">{tagline}</p>
+    <div class="cta">
+      <a class="btn solid" href="/projects">See my projects</a>
+      <a class="btn" href="/Keshia_Gunawan_Resume.pdf" target="_blank">Résumé (PDF)</a>
+    </div>
+    <div class="route-wrap"><TransitLine /></div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <h2>Selected work</h2>
+        <a href="/projects">All projects →</a>
+      </div>
+      <div class="grid reveal">
+        {featured.map((p) => <ProjectCard project={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <h2>Off the clock</h2>
+        <a href="/off-the-clock">See more →</a>
+      </div>
+      <p class="lede">I collect data on everything, including my lunch.</p>
+      <div class="tiles reveal">
+        <a class="tile photo" href="/off-the-clock#street">
+          {coverPhoto && <Image src={coverPhoto.data.image} alt={coverPhoto.data.caption} width={700} />}
+          <span class="tlabel"><span class="label">Street photography</span></span>
+        </a>
+        <a class="tile stat coffee" href="/off-the-clock#brew-log">
+          <span class="label">Home espresso log</span>
+          <span class="big">{brews.length}</span>
+          <span>shots logged, mostly trial and error</span>
+        </a>
+        <a class="tile stat food" href="/off-the-clock#food">
+          <span class="label">Restaurants reviewed</span>
+          <span class="big">{food.restaurants}</span>
+          <span>across {food.cities} cities and {food.cuisines} cuisines</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap reveal">
+      <div class="closing">
+        <h2>Next stop: Summer 2027.</h2>
+        <p class="lede">I’m looking for internships in data analytics, strategy, and consulting, in New York or Jakarta.</p>
+        <a class="btn solid" href={`mailto:${contact.email}`}>Say hello</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { padding-top: clamp(48px, 10vw, 120px); padding-bottom: clamp(48px, 8vw, 96px); }
+  .soft { color: var(--ink-soft); font-weight: 500; }
+  .cta { display: flex; gap: 12px; flex-wrap: wrap; margin: 28px 0 56px; }
+  .route-wrap { max-width: 640px; }
+  .head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .tiles { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 20px; margin-top: 24px; }
+  .tile {
+    position: relative; border-radius: var(--radius); overflow: hidden; min-height: 260px;
+    text-decoration: none; color: var(--ink); border: 1px solid var(--line); background: var(--surface);
+  }
+  .tile.photo img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transition: transform .6s; }
+  .tile.photo:hover img { transform: scale(1.04); }
+  .tlabel { position: absolute; left: 12px; bottom: 12px; background: var(--bg); padding: 4px 10px; border-radius: 999px; }
+  .tlabel .label { color: var(--ink); }
+  .stat { display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; padding: 24px; }
+  .stat .big { font-family: var(--font-display); font-weight: 700; font-size: 3.4rem; line-height: 1; }
+  .stat span:last-child { color: var(--ink-soft); }
+  .coffee .big { color: var(--crema); }
+  .food .big { color: var(--line-jkt); }
+  .tile:hover { border-color: var(--accent-bright); }
+  .closing { max-width: 640px; }
+  @media (max-width: 780px) {
+    .tiles { grid-template-columns: 1fr; }
+    .tile { min-height: 200px; }
+  }
+</style>

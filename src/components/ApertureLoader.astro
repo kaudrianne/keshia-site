@@ -1,0 +1,56 @@
+---
+// A camera iris that spins, then opens to reveal the page.
+// Shows once per visit (not on every page click) and is skipped for people
+// who have "reduce motion" turned on.
+const blades = Array.from({ length: 6 }, (_, i) => i);
+---
+<div id="aperture" aria-hidden="true">
+  <svg viewBox="-50 -50 100 100" class="iris">
+    <circle r="49" class="ring" />
+    <g class="spin">
+      {blades.map((i) => (
+        <g class="blade" style={`--i:${i}`}>
+          <path d="M0,-49 A49,49 0 0 1 42.4,-24.5 L6,4 L-4,-2 Z" />
+        </g>
+      ))}
+    </g>
+  </svg>
+  <p class="label cap">Focusing…</p>
+</div>
+
+<style>
+  #aperture {
+    position: fixed; inset: 0; z-index: 100;
+    display: none; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+    background: var(--bg);
+    transition: opacity .45s ease .55s;
+  }
+  :global(html.show-aperture) #aperture { display: flex; }
+  .iris { width: 120px; height: 120px; overflow: visible; }
+  .ring { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+  .spin { animation: spin 1.1s cubic-bezier(.6,.1,.3,1) forwards; transform-origin: 0 0; }
+  .blade { transform: rotate(calc(var(--i) * 60deg)); transform-origin: 0 0; }
+  .blade path {
+    fill: var(--accent); stroke: var(--bg); stroke-width: 1;
+    transition: transform .55s cubic-bezier(.7,0,.3,1);
+  }
+  #aperture.open .blade path { transform: translate(0, -46px); }
+  #aperture.open .ring { opacity: 0; transition: opacity .4s; }
+  #aperture.open { opacity: 0; }
+  @keyframes spin { from { transform: rotate(-90deg); } to { transform: rotate(0deg); } }
+  .cap { margin: 0; }
+</style>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById('aperture');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var seen = false;
+    try { seen = sessionStorage.getItem('aperture-seen') === '1'; } catch (e) {}
+    if (reduce || seen || !el) return;
+    document.documentElement.classList.add('show-aperture');
+    try { sessionStorage.setItem('aperture-seen', '1'); } catch (e) {}
+    setTimeout(function () { el.classList.add('open'); }, 1100);
+    setTimeout(function () { document.documentElement.classList.remove('show-aperture'); }, 2200);
+  })();
+</script>

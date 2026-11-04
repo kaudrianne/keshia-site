@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import { contact } from '../data/site';
+
+// Small, specific facts. Edit freely.
+const facts = [
+  'I plan subway exits so I arrive early, not just on time.',
+  'Benchmarking iced vanilla lattes across 30+ NYC coffee shops (ongoing).',
+  'Tiramisu quality control is a serious responsibility.',
+  'Iced water in any weather.',
+  'Word search, competitively, against no one.',
+  'Proud parent of Toffie, a maltipoo.',
+];
+---
+<Base title="About" description="Who I am, how I got here, and how to reach me.">
+  <section class="wrap about">
+    <div class="text">
+      <p class="label">About</p>
+      <h1>Jakarta → Evanston → New York</h1>
+      <div class="prose">
+        <p>
+          I grew up in Jakarta, studied cognitive science and data science at Northwestern, and I’m now at
+          Columbia for an MS in Applied Analytics. Somewhere along the way I worked at a bank, a consulting
+          firm, and a cloud company, and learned that the most useful number is usually the one nobody checked.
+        </p>
+        <p>
+          Cognitive science taught me how people actually make decisions. Data science taught me how to measure
+          them. I like work that needs both: figuring out why customers leave, which option is worth the money,
+          or what a dashboard isn’t telling you.
+        </p>
+        <p>TODO: one or two sentences in your own voice about what you want to do next.</p>
+      </div>
+      <div class="cta">
+        <a class="btn solid" href={`mailto:${contact.email}`}>Email me</a>
+        <a class="btn" href={contact.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="/Keshia_Gunawan_Resume.pdf" target="_blank">Résumé</a>
+      </div>
+    </div>
+    <aside class="card facts">
+      <p class="label">Unofficial facts</p>
+      <ul>{facts.map((f) => <li>{f}</li>)}</ul>
+      <p class="label lang">English · Bahasa Indonesia</p>
+    </aside>
+  </section>
+</Base>
+
+<style>
+  .about {
+    padding-top: clamp(40px, 8vw, 88px); padding-bottom: 40px;
+    display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(24px, 5vw, 56px); align-items: start;
+  }
+  .cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+  .facts ul { list-style: none; padding: 0; margin: 12px 0 20px; }
+  .facts li { padding: 10px 0; border-bottom: 1px dashed var(--line); }
+  .facts li::before { content: '●'; color: var(--accent-bright); font-size: .6rem; margin-right: 10px; vertical-align: middle; }
+  .lang { margin: 0; }
+  @media (max-width: 780px) { .about { grid-template-columns: 1fr; } }
+</style>

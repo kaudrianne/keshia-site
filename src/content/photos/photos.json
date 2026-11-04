@@ -1,0 +1,44 @@
+[
+  {
+    "id": "placeholder-01",
+    "image": "./placeholder-01.jpg",
+    "caption": "Placeholder: replace with one of your street photos",
+    "place": "Jakarta",
+    "year": "2025"
+  },
+  {
+    "id": "placeholder-02",
+    "image": "./placeholder-02.jpg",
+    "caption": "Placeholder: replace with one of your street photos",
+    "place": "Chicago",
+    "year": "2025"
+  },
+  {
+    "id": "placeholder-03",
+    "image": "./placeholder-03.jpg",
+    "caption": "Placeholder: replace with one of your street photos",
+    "place": "New York",
+    "year": "2026"
+  },
+  {
+    "id": "placeholder-04",
+    "image": "./placeholder-04.jpg",
+    "caption": "Placeholder: replace with one of your street photos",
+    "place": "Evanston",
+    "year": "2024"
+  },
+  {
+    "id": "placeholder-05",
+    "image": "./placeholder-05.jpg",
+    "caption": "Placeholder: replace with one of your street photos",
+    "place": "Lima",
+    "year": "2024"
+  },
+  {
+    "id": "placeholder-06",
+    "image": "./placeholder-06.jpg",
+    "caption": "Placeholder: replace with one of your street photos",
+    "place": "New York",
+    "year": "2026"
+  }
+]

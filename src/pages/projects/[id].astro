@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((p) => ({ params: { id: p.id }, props: { project: p } }));
+}
+const { project } = Astro.props;
+const { Content } = await render(project);
+const d = project.data;
+const statusText = { shipped: 'Shipped', building: 'Now building', paused: 'Paused' }[d.status];
+---
+<Base title={d.title} description={d.summary}>
+  <article class="wrap">
+    <a href="/projects" class="back">← All projects</a>
+    <header>
+      <p class="label">{d.kind} · {d.year} · {statusText}</p>
+      <h1>{d.title}</h1>
+      <p class="lede">{d.summary}</p>
+      {d.stats.length > 0 && (
+        <dl class="stats">
+          {d.stats.map((s) => <div><dd>{s.value}</dd><dt>{s.label}</dt></div>)}
+        </dl>
+      )}
+      {d.tools.length > 0 && <p class="tools">{d.tools.map((t) => <span class="chip">{t}</span>)}</p>}
+    </header>
+    <div class="prose"><Content /></div>
+  </article>
+</Base>
+
+<style>
+  article { padding-top: clamp(32px, 6vw, 64px); padding-bottom: 40px; }
+  .back { font-size: .9rem; text-decoration: none; }
+  header { margin: 24px 0 32px; padding-bottom: 32px; border-bottom: 1px solid var(--line); }
+  .stats { display: flex; gap: clamp(20px, 5vw, 48px); flex-wrap: wrap; margin: 24px 0; }
+  .stats dd { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 2rem; color: var(--accent); }
+  .stats dt { font-size: .85rem; color: var(--ink-soft); }
+  .tools { display: flex; gap: 6px; flex-wrap: wrap; margin: 0; }
+</style>

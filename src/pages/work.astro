@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import { journey } from '../data/journey';
+const kindLabel = { work: 'Internship', school: 'School', lead: 'Leadership' };
+---
+<Base title="Work" description="Internships, school, and leadership: Jakarta → Evanston → New York.">
+  <section class="wrap intro">
+    <p class="label">The route so far</p>
+    <h1>Work</h1>
+    <p class="lede">Three cities, each its own line. Every stop is somewhere I learned something I still use.</p>
+  </section>
+
+  <section class="wrap map">
+    {journey.map((c) => (
+      <div class="line reveal" style={`--c: var(--line-${c.id})`}>
+        <header class="terminal">
+          <span class="badge">{c.code}</span>
+          <div>
+            <h2>{c.city}</h2>
+            <p class="label">{c.years} · {c.blurb}</p>
+          </div>
+        </header>
+        <ol class="stations">
+          {c.stations.map((s) => (
+            <li class="station">
+              <span class="dot" aria-hidden="true"></span>
+              <div class="card">
+                <div class="meta"><span class="label">{kindLabel[s.kind]} · {s.when}</span></div>
+                <h3>{s.name}</h3>
+                <p class="role">{s.role}</p>
+                <ul>{s.points.map((p) => <li>{p}</li>)}</ul>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    ))}
+    <p class="end label">Line continues…</p>
+  </section>
+</Base>
+
+<style>
+  .intro { padding-top: clamp(40px, 8vw, 88px); padding-bottom: 24px; }
+  .map { padding-bottom: 40px; }
+  .line { position: relative; padding-bottom: 8px; }
+  .terminal { display: flex; align-items: center; gap: 16px; padding: 28px 0 16px; }
+  .terminal h2 { margin: 0; }
+  .terminal p { margin: 2px 0 0; text-transform: none; letter-spacing: 0; font-family: var(--font-body); font-size: .9rem; }
+  .badge {
+    flex: none; width: 56px; height: 56px; border-radius: 50%;
+    display: grid; place-items: center; background: var(--c); color: #fff;
+    font-family: var(--font-mono); font-weight: 500; font-size: .85rem;
+  }
+  .stations { list-style: none; margin: 0; padding: 0 0 0 0; position: relative; }
+  .stations::before {
+    content: ''; position: absolute; left: 25px; top: 0; bottom: 0; width: 6px; background: var(--c); border-radius: 3px;
+  }
+  .station { position: relative; padding: 0 0 20px 72px; }
+  .dot {
+    position: absolute; left: 17px; top: 22px; width: 22px; height: 22px; border-radius: 50%;
+    background: var(--bg); border: 5px solid var(--c);
+  }
+  .station .card { transition: border-color .2s; }
+  .station:hover .card { border-color: var(--c); }
+  .station h3 { margin: 4px 0 0; }
+  .role { color: var(--ink-soft); margin: 0 0 8px; font-size: .95rem; }
+  .station ul { margin: 0; padding-left: 1.1em; }
+  .station li { margin-bottom: 4px; font-size: .95rem; }
+  .end { padding-left: 72px; }
+  @media (max-width: 560px) {
+    .station { padding-left: 52px; }
+    .stations::before { left: 15px; }
+    .dot { left: 7px; }
+    .badge { width: 46px; height: 46px; }
+    .end { padding-left: 52px; }
+  }
+</style>

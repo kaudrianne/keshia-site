@@ -1,0 +1,38 @@
+---
+// Small horizontal "route map" for the home page: JKT → CHI → NYC.
+import { journey } from '../data/journey';
+const last = journey.length - 1;
+---
+<ol class="route" aria-label="Where I've lived: Jakarta, then Evanston/Chicago, then New York">
+  {journey.map((c, i) => (
+    <li class={`stop ${c.id}`} style={`--c: var(--line-${c.id})`}>
+      <span class="seg" aria-hidden="true"></span>
+      <span class={`node ${i === last ? 'here' : ''}`} aria-hidden="true"></span>
+      <span class="code">{c.code}</span>
+      <span class="city">{c.city}</span>
+      {i === last && <span class="label you">You are here</span>}
+    </li>
+  ))}
+</ol>
+
+<style>
+  .route { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); }
+  .stop { position: relative; padding-top: 34px; }
+  .seg {
+    position: absolute; top: 12px; left: 0; right: 0; height: 6px; background: var(--c);
+  }
+  .stop:first-child .seg { left: 9px; border-radius: 6px 0 0 6px; }
+  .stop:last-child .seg { right: auto; width: 12px; }
+  .node {
+    position: absolute; top: 4px; left: 0; width: 22px; height: 22px; border-radius: 50%;
+    background: var(--bg); border: 5px solid var(--c);
+  }
+  .node.here::after {
+    content: ''; position: absolute; inset: -9px; border-radius: 50%;
+    border: 2px solid var(--c); animation: ping 2s ease-out infinite;
+  }
+  @keyframes ping { from { opacity: .8; transform: scale(.6); } to { opacity: 0; transform: scale(1.5); } }
+  .code { display: block; font-family: var(--font-mono); font-weight: 500; color: var(--c); font-size: .85rem; }
+  .city { display: block; font-family: var(--font-display); font-weight: 600; font-size: clamp(.95rem, 2.4vw, 1.15rem); }
+  .you { display: block; margin-top: 2px; }
+</style>
