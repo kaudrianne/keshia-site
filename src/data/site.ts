@@ -2,6 +2,8 @@
 export const contact = {
   email: 'keshia.audrianne@gmail.com',
   linkedin: 'https://linkedin.com/in/keshiaaudrianne',
+  instagram: { handle: 'keshiaaudrianne', url: 'https://www.instagram.com/keshiaaudrianne' },
+  foodInstagram: { handle: 'todaysmenujkt', url: 'https://www.instagram.com/todaysmenujkt' },
 };
 
 export const tagline =

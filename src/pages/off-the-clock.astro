@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import { food } from '../data/food';
+import { contact } from '../data/site';
 
 // ── Photos (plus a resized 1600px version for the full-screen view)
 const photos = await Promise.all(
@@ -54,6 +55,7 @@ const favorites = food.favorites
       <p class="label">Contact sheet</p>
       <h2>Street</h2>
       <p class="lede">Jakarta, Chicago, New York, and wherever I’m eating next.</p>
+      <a class="ig" href={contact.instagram.url} target="_blank" rel="noopener">More on Instagram @{contact.instagram.handle} →</a>
       <div class="sheet reveal">
         {photos.map((p, i) => (
           <button class="frame" type="button" data-full={p.full} data-cap={`${p.data.caption} · ${p.data.place}, ${p.data.year}`}>
@@ -122,6 +124,7 @@ const favorites = food.favorites
       <p class="label">Logged on Beli</p>
       <h2>Food</h2>
       <p class="lede">I review the meals I care about. My camera roll says I’ve eaten at about twice as many.</p>
+      <a class="ig" href={contact.foodInstagram.url} target="_blank" rel="noopener">Follow the food account @{contact.foodInstagram.handle} →</a>
 
       <div class="food-big reveal">
         <div><span class="num">{food.restaurants}</span><span class="label">restaurants</span></div>
@@ -185,6 +188,8 @@ const favorites = food.favorites
   .jump a { text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: .35em 1em; color: var(--ink); font-size: .9rem; }
   .jump a:hover { border-color: var(--accent-bright); }
   .section { scroll-margin-top: 60px; }
+  .ig { display: inline-block; font-weight: 500; text-decoration: none; margin-top: -4px; }
+  .ig:hover { text-decoration: underline; }
 
   /* contact sheet */
   .sheet {
