@@ -140,3 +140,7 @@ p { margin: 0 0 1em; }
 }
 /* phone-screen screenshots: keep them phone-sized */
 .prose img[src*="ceklondri-result"], .prose img[src*="ceklondri-order"], .prose img[src*="ec-game"] { max-width: 360px; width: 100%; }
+
+/* interactive charts that keep their shape at any width */
+.prose figure.widget iframe[style*="aspect-ratio"] { height: auto; display: block; }
+.prose figure.widget-narrow { max-width: 480px; }
