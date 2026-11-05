@@ -1,21 +1,38 @@
 ---
 // Small horizontal "route map" for the home page: JKT → CHI → NYC.
+// A little train rides the line when the page loads; tap or hover the map to ride again.
 import { journey } from '../data/journey';
 const last = journey.length - 1;
 ---
-<ol class="route" aria-label="Where I've lived: Jakarta, then Evanston/Chicago, then New York">
-  {journey.map((c, i) => (
-    <li class={`stop ${c.id}`} style={`--c: var(--line-${c.id})`}>
-      <span class="seg" aria-hidden="true"></span>
-      <span class={`node ${i === last ? 'here' : ''}`} aria-hidden="true"></span>
-      <span class="code">{c.code}</span>
-      <span class="city">{c.city}</span>
-      {i === last && <span class="label you">You are here</span>}
-    </li>
-  ))}
-</ol>
+<div class="route-box" id="route" title="Ride again">
+  <ol class="route" aria-label="Where I've lived: Jakarta, then Evanston/Chicago, then New York">
+    {journey.map((c, i) => (
+      <li class={`stop ${c.id}`} style={`--c: var(--line-${c.id})`}>
+        <span class="seg" aria-hidden="true"></span>
+        <span class={`node ${i === last ? 'here' : ''}`} aria-hidden="true"></span>
+        <span class="code">{c.code}</span>
+        <span class="city">{c.city}</span>
+        {i === last && <span class="label you">I am here</span>}
+      </li>
+    ))}
+  </ol>
+  <span class="train go" aria-hidden="true"><span></span><span></span></span>
+</div>
+
+<script>
+  const box = document.getElementById('route');
+  const train = box?.querySelector<HTMLElement>('.train');
+  const ride = () => {
+    if (!train || train.classList.contains('go')) return;
+    train.classList.add('go');
+  };
+  train?.addEventListener('animationend', () => train.classList.remove('go'));
+  box?.addEventListener('mouseenter', ride);
+  box?.addEventListener('click', ride);
+</script>
 
 <style>
+  .route-box { position: relative; cursor: pointer; -webkit-tap-highlight-color: transparent; }
   .route { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); }
   .stop { position: relative; padding-top: 34px; }
   .seg {
@@ -35,4 +52,24 @@ const last = journey.length - 1;
   .code { display: block; font-family: var(--font-mono); font-weight: 500; color: var(--c); font-size: .85rem; }
   .city { display: block; font-family: var(--font-display); font-weight: 600; font-size: clamp(.95rem, 2.4vw, 1.15rem); }
   .you { display: block; margin-top: 2px; }
+
+  /* the train: a little subway car with two windows */
+  .train {
+    position: absolute; top: 5px; left: -4px; width: 30px; height: 20px;
+    background: var(--ink); border-radius: 6px 6px 4px 4px;
+    display: flex; gap: 4px; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    box-shadow: 0 2px 0 color-mix(in srgb, var(--ink) 40%, transparent);
+  }
+  .train span { width: 7px; height: 6px; border-radius: 2px; background: #f2c14e; }
+  .train.go { animation: ride 3.2s cubic-bezier(.45, .05, .35, 1) forwards; }
+  @keyframes ride {
+    0%   { left: -4px; opacity: 0; }
+    6%   { opacity: 1; }
+    38%  { left: calc(100% / 3 - 4px); }
+    50%  { left: calc(100% / 3 - 4px); }   /* quick stop in Chicago */
+    88%  { left: calc(200% / 3 - 4px); opacity: 1; }
+    100% { left: calc(200% / 3 - 4px); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .train { display: none; } }
 </style>

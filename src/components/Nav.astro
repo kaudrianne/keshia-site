@@ -10,7 +10,7 @@ const path = Astro.url.pathname.replace(/\/$/, '');
 <header class="nav">
   <div class="wrap row">
     <a href="/" class="mark" aria-label="Home">
-      <img class="logo" src="/favicon.svg" alt="" width="24" height="24" />Keshia Gunawan
+      <img class="logo" src="/k.svg" alt="" width="22" height="22" />Keshia Gunawan
     </a>
     <nav aria-label="Main">
       {links.map((l) => (
@@ -30,9 +30,10 @@ const path = Astro.url.pathname.replace(/\/$/, '');
   .row { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 60px; flex-wrap: wrap; }
   .mark {
     font-family: var(--font-display); font-weight: 600; color: var(--ink);
-    text-decoration: none; display: flex; align-items: center; gap: 10px;
+    text-decoration: none; display: flex; align-items: center; gap: 6px;
   }
-  .logo { width: 24px; height: 24px; flex: none; }
+  .logo { width: 22px; height: 22px; flex: none; transition: transform .3s; }
+  .mark:hover .logo { transform: rotate(-12deg); }
   nav { display: flex; gap: clamp(12px, 3vw, 28px); flex-wrap: wrap; }
   nav a { color: var(--ink-soft); text-decoration: none; font-size: .95rem; padding: 4px 0; }
   nav a:hover, nav a[aria-current='page'] { color: var(--ink); box-shadow: inset 0 -2px 0 var(--accent-bright); }

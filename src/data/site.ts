@@ -8,3 +8,11 @@ export const contact = {
 
 export const tagline =
   'Analyst who turns messy data into decisions, with experience in AI (AWS), consulting (Bain), and financial markets (Maybank).';
+
+// "Currently" strip on the home page. Edit anytime; keep each line short.
+// The coffee line fills itself in from your latest espresso shot.
+export const currently = [
+  { emoji: '📷', text: 'Shooting street photos around New York' },
+  { emoji: '🍜', text: 'Eating my way through NYC: 31 restaurants since August' },
+  { emoji: '📊', text: 'Taking machine learning, data engineering, and R at Columbia' },
+];
